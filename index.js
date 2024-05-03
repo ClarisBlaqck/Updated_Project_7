@@ -1,4 +1,11 @@
 alert ("welcome");
+let date = document.querySelector(`#date`);
+date.innerHTML = dateTime(new Date());
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener(`submit`, submit);
+let currentButton = document.querySelector("#current-location-button");
+currentButton.addEventListener(`click`, getCurrentLocation);
+
 function dateTime(timestamp) {
   let now = new Date(timestamp);
   let date = now.getDate();
@@ -28,20 +35,31 @@ function dateTime(timestamp) {
 
 
 function showWeatherTemp(response) {
-  document.querySelector(`#city`).innerHTML = response.data.name;
-  document.querySelector(`#temperature`).innerHTML = Math.round(
-    response.data.main.temp
+  let temperatureElement = document.querySelector("#temperature");
+  let temperature = response.data.temperature.current;
+  let cityElement = document.querySelector("#city");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#windspeed");
+  let dateElement = document.querySelector("#date");
+  let descriptionElement =  document.querySelector("#description");
+  let icon = document.querySelector("#icon");
+
+  cityElement.innerHTML = response.data.city;
+  temperatureElement.innerHTML = Math.round(
+    (response.data.main.temp)
   );
-  document.querySelector(`#humidity`).innerHTML = response.data.main.humidity;
-  document.querySelector(`#description`).innerHTML =
+ humidityElement.innerHTML = response.data.main.humidity;
+  descriptionElement.innerHTML =
     response.data.weather[0].description;
+    windElement.innerHTML = `${response.data.wind.speed} Km/h`;
+    dateElement.innerHTML = dateTime(new Date());
 }
 
 
 function iconDisplay {
   let iconElement = document.querySelector("#icon");
     iconElement.setAttribute ("src", 'http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png');
-    document.querySelector('#icon').innerHTML= (#icon);
+    iconElement.innerHTML= ("#icon");
 }
 
 
@@ -61,6 +79,7 @@ function showConversion (event){
   let temperatureElement= document.querySelector("#farenheit-link");
   temperatureElement.innerHTML = math.round(farenheitTemperature);
 }
+
 function searchLocation(position) {
   let apiKey = "e69d8404a2535885a8e02325aef69c55";
   let latitude = position.coords.latitude;
@@ -70,13 +89,8 @@ function searchLocation(position) {
 &lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeatherTemp);
 }
+
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
-let date = document.querySelector(`#date`);
-date.innerHTML = dateTime(new Date());
-let searchForm = document.querySelector(`#search-form`);
-searchForm.addEventListener(`submit`, submit);
-let currentButton = document.querySelector(`#current-location-button`);
-currentButton.addEventListener(`click`, getCurrentLocation);

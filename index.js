@@ -53,6 +53,7 @@ function showWeatherTemp(response) {
     response.data.weather[0].description;
     windElement.innerHTML = `${response.data.wind.speed} Km/h`;
     dateElement.innerHTML = dateTime(new Date());
+    icon.innerHTML = `<img src="${response.data.condition.icon_url}" />`
 }
 
 

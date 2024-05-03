@@ -71,7 +71,7 @@ function searchCity(city) {
 function submit(event) {
   event.preventDefault();
   let city = document.querySelector("#city-input").value;
-  searchCity(city.value);
+  searchCity(city);
 }
 function showConversion (event){
   event.preventDefault();

@@ -98,3 +98,6 @@ let currentButton = document.querySelector("#current-location-button");
 currentButton.addEventListener(`click`, getCurrentLocation);
 let changeTemperature = document.querySelector("#farenheit-link");
 changeTemperature.addEventListener(`click`, showConversion);
+let temperature =document.querySelector(`#temperature`);
+temperature.innerHTML = showWeatherTemp();
+

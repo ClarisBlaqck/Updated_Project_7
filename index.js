@@ -30,7 +30,7 @@ function dateTime(timestamp) {
 
 function showWeatherTemp(response) {
   let temperatureElement = document.querySelector("#temperature");
-  let temperature = response.data.temperature.current;
+  let celciusTemperature = response.data.main.temp;
   let cityElement = document.querySelector("#city");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#windspeed");
@@ -40,13 +40,13 @@ function showWeatherTemp(response) {
 
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = Math.round(
-    (response.data.main.temp)
+    (celciusTemperature);
   );
  humidityElement.innerHTML = response.data.main.humidity;
   descriptionElement.innerHTML =
     response.data.weather[0].description;
     windElement.innerHTML = `${response.data.wind.speed} Km/h`;
-    dateElement.innerHTML = dateTime(new Date());
+    dateElement.innerHTML = formatDate(response.data.dt * 1000);
     icon.innerHTML = `<img src="${response.data.condition.icon_url}" />`
 }
 
@@ -99,5 +99,5 @@ currentButton.addEventListener(`click`, getCurrentLocation);
 let changeTemperature = document.querySelector("#farenheit-link");
 changeTemperature.addEventListener(`click`, showConversion);
 let temperature =document.querySelector(`#temperature`);
-temperature.innerHTML = showWeatherTemp();
+
 

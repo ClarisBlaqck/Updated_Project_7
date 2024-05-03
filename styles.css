@@ -6,6 +6,9 @@
     padding-left: 50px;
     padding-bottom: 20px;
     text-align: center;
+    max-width: 600px;
+    font-weight: 500;
+    font-size: larger;
 }
 
 .weatherapp{
@@ -13,7 +16,14 @@
     display: block;
 }
 
-.code-link{
+.search-form{
+    width: 80%;
+    font-size: 16;
+    padding: 15px 20px;
+    border-radius: 6px;
+}
+
+footer{
      text-align: center;
      font-family: Georgia, 'Times New Roman', Times, serif;
 

@@ -66,7 +66,7 @@ function iconDisplay {
 
 function searchCity(city) {
   let apiKey = "e69d8404a2535885a8e02325aef69c55";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
   axios.get(apiUrl).then(showWeatherTemp);
 }
 function submit(event) {

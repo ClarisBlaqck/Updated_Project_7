@@ -1,10 +1,4 @@
 alert ("welcome");
-let date = document.querySelector(`#date`);
-date.innerHTML = dateTime(new Date());
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener(`submit`, submit);
-let currentButton = document.querySelector("#current-location-button");
-currentButton.addEventListener(`click`, getCurrentLocation);
 
 function dateTime(timestamp) {
   let now = new Date(timestamp);
@@ -95,3 +89,12 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
+ 
+let date = document.querySelector(`#date`);
+date.innerHTML = dateTime(new Date());
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener(`submit`, submit);
+let currentButton = document.querySelector("#current-location-button");
+currentButton.addEventListener(`click`, getCurrentLocation);
+let changeTemperature = document.querySelector("#farenheit-link");
+changeTemperature.addEventListener(`click`, showConversion);

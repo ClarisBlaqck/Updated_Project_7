@@ -1,4 +1,4 @@
-alert ("welcome");
+alert("welcome");
 
 function dateTime(timestamp) {
   let now = new Date(timestamp);
@@ -20,46 +20,43 @@ function dateTime(timestamp) {
     "Sept",
     "Oct",
     "Nov",
-    "Dec"
+    "Dec",
   ];
   let month = months[now.getMonth()];
   let formattedDate = `${day} ${month} ${date}, ${hours}:${minutes}, ${year}`;
   return formattedDate;
 }
 
-
 function showWeatherTemp(response) {
   let temperatureElement = document.querySelector("#temperature");
-  let celciusTemperature = response.data.main.temp;
+  let celciusTemperature = response.data.temperature.current;
   let cityElement = document.querySelector("#city");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#windspeed");
   let dateElement = document.querySelector("#date");
-  let descriptionElement =  document.querySelector("#description");
+  let descriptionElement = document.querySelector("#description");
   let icon = document.querySelector("#icon");
 
   cityElement.innerHTML = response.data.city;
-  temperatureElement.innerHTML = Math.round(
-    (celciusTemperature);
-  );
- humidityElement.innerHTML = response.data.main.humidity;
-  descriptionElement.innerHTML =
-    response.data.weather[0].description;
-    windElement.innerHTML = `${response.data.wind.speed} Km/h`;
-    dateElement.innerHTML = formatDate(response.data.dt * 1000);
-    icon.innerHTML = `<img src="${response.data.condition.icon_url}" />`
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
+  humidityElement.innerHTML = response.data.temperature.humidity;
+  descriptionElement.innerHTML = response.data.condition.description;
+  windElement.innerHTML = `${response.data.wind.speed} Km/h`;
+  dateElement.innerHTML = dateTime(response.data.time * 1000);
+  icon.innerHTML = `<img src="${response.data.condition.icon_url}" />`;
 }
 
-
-function iconDisplay {
+function iconDisplay() {
   let iconElement = document.querySelector("#icon");
-    iconElement.setAttribute ("src", 'http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png');
-    iconElement.innerHTML= ("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.innerHTML = "#icon";
 }
-
 
 function searchCity(city) {
-  let apiKey = "e69d8404a2535885a8e02325aef69c55";
+  let apiKey = "1a747f2d7ac32a100bt13fab8776o6ca";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
   axios.get(apiUrl).then(showWeatherTemp);
 }
@@ -68,20 +65,19 @@ function submit(event) {
   let city = document.querySelector("#city-input").value;
   searchCity(city);
 }
-function showConversion (event){
+function showConversion(event) {
   event.preventDefault();
-  let farenheitTemperature = (14*9)/5+32;
-  let temperatureElement= document.querySelector("#farenheit-link");
+  let farenheitTemperature = (14 * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#farenheit-link");
   temperatureElement.innerHTML = math.round(farenheitTemperature);
 }
 
 function searchLocation(position) {
-  let apiKey = "e69d8404a2535885a8e02325aef69c55";
+  let apiKey = "1a747f2d7ac32a100bt13fab8776o6ca";
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let units = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}
-&lon=${longitude}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeatherTemp);
 }
 
@@ -89,15 +85,13 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
- 
+
 let date = document.querySelector(`#date`);
 date.innerHTML = dateTime(new Date());
-let searchForm = document.querySelector("#search-form");
+let searchForm = document.querySelector(".search-form");
 searchForm.addEventListener(`submit`, submit);
 let currentButton = document.querySelector("#current-location-button");
 currentButton.addEventListener(`click`, getCurrentLocation);
-let changeTemperature = document.querySelector("#farenheit-link");
+let changeTemperature = document.querySelector("#fahrenheit-link");
 changeTemperature.addEventListener(`click`, showConversion);
-let temperature =document.querySelector(`#temperature`);
-
-
+let temperature = document.querySelector(`#temperature`);

@@ -68,8 +68,8 @@ function submit(event) {
 function showConversion(event) {
   event.preventDefault();
   let farenheitTemperature = (14 * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#farenheit-link");
-  temperatureElement.innerHTML = math.round(farenheitTemperature);
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(farenheitTemperature);
 }
 
 function searchLocation(position) {
